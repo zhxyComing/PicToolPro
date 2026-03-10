@@ -64,12 +64,12 @@ struct ContentView: View {
                     HStack {
                         if !processedImages.isEmpty && !showOriginal {
                             if let processed = processedImages.first {
-                                Image(processed.nsImage, scale: 1.0)
+                                Image(nsImage: processed.nsImage)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                             }
                         } else if let first = images.first {
-                            Image(first.nsImage, scale: 1.0)
+                            Image(nsImage: first.nsImage)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                         }
@@ -126,7 +126,7 @@ struct ContentView: View {
         panel.allowsMultipleSelection = true
         panel.canChooseDirectories = false
         panel.canChooseFiles = true
-        panel.allowedContentTypes = [.image, .png, .jpeg, .heic, .webP, .bmp, .gif, .avif]
+        panel.allowedContentTypes = [.image, .png, .jpeg, .heic, .bmp, .gif]
         
         if panel.runModal() == .OK {
             images = panel.urls.compactMap { url in
