@@ -11,12 +11,14 @@ struct ContentView: View {
         case cornerCrop = "圆角裁剪"
         case compression = "图片压缩"
         case formatConvert = "格式转换"
+        case imageInfo = "图片信息"
         
         var icon: String {
             switch self {
             case .cornerCrop: return "rectangle.on.rectangle"
             case .compression: return "arrow.down.circle"
             case .formatConvert: return "doc.badge.arrow.up"
+            case .imageInfo: return "info.circle"
             }
         }
     }
@@ -96,6 +98,8 @@ struct ContentView: View {
                         CompressionView(images: $images, processedImages: $processedImages, isProcessing: $isProcessing)
                     case .formatConvert:
                         FormatConvertView(images: $images, processedImages: $processedImages, isProcessing: $isProcessing)
+                    case .imageInfo:
+                        ImageInfoView(images: $images)
                     }
                 }
                 
