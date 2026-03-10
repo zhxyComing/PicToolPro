@@ -15,6 +15,7 @@
 		6E0E7993A9EA0E8CA1CBD61C /* CompressionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E479684D738A4BDAFFA1A73 /* CompressionView.swift */; };
 		718C5EC869802741F1D35916 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B95ED1488622174BA8308F /* ContentView.swift */; };
 		8F78A44D0E697F914364EE36 /* ImageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790E59E9F00B2CC1F93F149 /* ImageModels.swift */; };
+		A6FA63740937315006EDC42F /* ImageInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F584C8BB1147912F77BA380E /* ImageInfoView.swift */; };
 		D299CDB6F20EC055B8AE4FFE /* ImageProcessingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DE6C8F93419D2F9E7BF92A /* ImageProcessingService.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		A97A9EDB63F796792C7579F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF2485AE054C0EC57E8D596B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D3B95ED1488622174BA8308F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F584C8BB1147912F77BA380E /* ImageInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -95,6 +97,7 @@
 				D3B95ED1488622174BA8308F /* ContentView.swift */,
 				797314CCDA042584BDDCC5B8 /* CornerCropView.swift */,
 				0E271EF7F9B37004FA69DE3C /* FormatConvertView.swift */,
+				F584C8BB1147912F77BA380E /* ImageInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				718C5EC869802741F1D35916 /* ContentView.swift in Sources */,
 				01558DFC797FE7DF73B844D3 /* CornerCropView.swift in Sources */,
 				6D75A53D3A2A6A069B52A9CD /* FormatConvertView.swift in Sources */,
+				A6FA63740937315006EDC42F /* ImageInfoView.swift in Sources */,
 				8F78A44D0E697F914364EE36 /* ImageModels.swift in Sources */,
 				D299CDB6F20EC055B8AE4FFE /* ImageProcessingService.swift in Sources */,
 				5FD6EA992969200756551FA1 /* PicToolProApp.swift in Sources */,
