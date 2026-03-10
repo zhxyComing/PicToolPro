@@ -14,8 +14,6 @@ class ImageProcessingService {
         guard let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return nil }
         
         let size = NSSize(width: cgImage.width, height: cgImage.height)
-        let rect = CGRect(origin: .zero, size: size)
-        
         let cornerRadius = min(radius, min(size.width, size.height) / 2)
         
         if transparentBackground {
@@ -28,7 +26,7 @@ class ImageProcessingService {
     private func createRoundedImageWithTransparency(cgImage: CGImage, size: NSSize, cornerRadius: CGFloat) -> NSImage? {
         let rect = CGRect(origin: .zero, size: size)
         
-        guard let context = CGContext(
+        guard let ctx = CGContext(
             data: nil,
             width: Int(size.width),
             height: Int(size.height),
@@ -38,20 +36,20 @@ class ImageProcessingService {
             bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
         ) else { return nil }
         
-        context.beginPath()
+        ctx.beginPath()
         let path = CGPath(roundedRect: rect, cornerWidth: cornerRadius, cornerHeight: cornerRadius, transform: nil)
-        context.addPath(path)
-        context.clip()
-        context.draw(cgImage, in: rect)
+        ctx.addPath(path)
+        ctx.clip()
+        ctx.draw(cgImage, in: rect)
         
-        guard let clippedImage = context.makeImage() else { return nil }
+        guard let clippedImage = ctx.makeImage() else { return nil }
         return NSImage(cgImage: clippedImage, size: size)
     }
     
     private func createRoundedImageWithWhiteBackground(cgImage: CGImage, size: NSSize, cornerRadius: CGFloat) -> NSImage? {
         let rect = CGRect(origin: .zero, size: size)
         
-        guard let context = CGContext(
+        guard let ctx = CGContext(
             data: nil,
             width: Int(size.width),
             height: Int(size.height),
@@ -62,18 +60,18 @@ class ImageProcessingService {
         ) else { return nil }
         
         // White background
-        context.setFillColor(NSColor.white.cgColor)
-        context.fill(rect)
+        ctx.setFillColor(NSColor.white.cgColor)
+        ctx.fill(rect)
         
         // Clip to rounded rect
-        context.beginPath()
+        ctx.beginPath()
         let path = CGPath(roundedRect: rect, cornerWidth: cornerRadius, cornerHeight: cornerRadius, transform: nil)
-        context.addPath(path)
-        context.clip()
+        ctx.addPath(path)
+        ctx.clip()
         
-        context.draw(cgImage, in: rect)
+        ctx.draw(cgImage, in: rect)
         
-        guard let clippedImage = context.makeImage() else { return nil }
+        guard let clippedImage = ctx.makeImage() else { return nil }
         return NSImage(cgImage: clippedImage, size: size)
     }
     
@@ -82,9 +80,8 @@ class ImageProcessingService {
     func compress(image: NSImage, mode: CompressionMode) -> (NSImage, Data)? {
         guard let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return nil }
         
+        var processedCGImage: CGImage = cgImage
         let ciImage = CIImage(cgImage: cgImage)
-        
-        var processedCIImage = ciImage
         
         // Apply scale if needed
         if case .scale(let width, let height, let percentage) = mode {
@@ -104,11 +101,17 @@ class ImageProcessingService {
             }
             
             if scaleX != 1.0 || scaleY != 1.0 {
-                processedCIImage = processedCIImage.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
+                let scaledImage = ciImage.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
+                processedCGImage = context.createCGImage(scaledImage, from: scaledImage.extent) ?? cgImage
             }
         }
         
-        // For lossy compression, we use JPEG
+        // Create NSImage from CGImage
+        let processedNSImage = NSImage(cgImage: processedCGImage, size: NSSize(width: processedCGImage.width, height: processedCGImage.height))
+        
+        guard let tiffData = processedNSImage.tiffRepresentation,
+              let bitmap = NSBitmapImageRep(data: tiffData) else { return nil }
+        
         var data: Data?
         var quality: Double = 0.8
         
@@ -116,14 +119,10 @@ class ImageProcessingService {
             quality = q
         }
         
-        if let tiffData = processedCIImage.tiffRepresentation,
-           let bitmap = NSBitmapImageRep(data: tiffData) {
-            if case .lossy = mode {
-                data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: quality])
-            } else {
-                // Lossless - use PNG
-                data = bitmap.representation(using: .png, properties: [:])
-            }
+        if case .lossy = mode {
+            data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: quality])
+        } else {
+            data = bitmap.representation(using: .png, properties: [:])
         }
         
         guard let compressedData = data,
@@ -135,11 +134,7 @@ class ImageProcessingService {
     // MARK: - Format Conversion
     
     func convert(image: NSImage, to format: ImageFormat, quality: Double = 0.8) -> (NSImage, Data)? {
-        guard let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return nil }
-        
-        let ciImage = CIImage(cgImage: cgImage)
-        
-        guard let tiffData = ciImage.tiffRepresentation,
+        guard let tiffData = image.tiffRepresentation,
               let bitmap = NSBitmapImageRep(data: tiffData) else { return nil }
         
         var data: Data?
@@ -150,19 +145,16 @@ class ImageProcessingService {
         case .jpg:
             data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: quality])
         case .webp:
-            // WebP requires additional handling - use HEIC as fallback for now
+            // WebP - use JPEG as fallback (WebP requires additional library)
             data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: quality])
         case .heic:
-            if #available(macOS 10.13, *) {
-                data = bitmap.representation(using: .jpeg2000, properties: [.compressionFactor: quality])
-            } else {
-                data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: quality])
-            }
+            data = bitmap.representation(using: .jpeg2000, properties: [.compressionFactor: quality])
         case .bmp:
             data = bitmap.representation(using: .bmp, properties: [:])
         case .gif:
             data = bitmap.representation(using: .gif, properties: [:])
         case .avif:
+            // AVIF - use JPEG as fallback
             data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: quality])
         }
         
