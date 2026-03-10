@@ -1,0 +1,484 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01558DFC797FE7DF73B844D3 /* CornerCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797314CCDA042584BDDCC5B8 /* CornerCropView.swift */; };
+		47A7508E11A34F675E9CC9DA /* PicToolProTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F440F4337227C7A29F70910 /* PicToolProTests.swift */; };
+		5F475E600C56B82069B3D29B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A97A9EDB63F796792C7579F6 /* Assets.xcassets */; };
+		5FD6EA992969200756551FA1 /* PicToolProApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C49ED4531AA27EADA3CD9 /* PicToolProApp.swift */; };
+		6D75A53D3A2A6A069B52A9CD /* FormatConvertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E271EF7F9B37004FA69DE3C /* FormatConvertView.swift */; };
+		6E0E7993A9EA0E8CA1CBD61C /* CompressionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E479684D738A4BDAFFA1A73 /* CompressionView.swift */; };
+		718C5EC869802741F1D35916 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B95ED1488622174BA8308F /* ContentView.swift */; };
+		8F78A44D0E697F914364EE36 /* ImageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790E59E9F00B2CC1F93F149 /* ImageModels.swift */; };
+		D299CDB6F20EC055B8AE4FFE /* ImageProcessingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DE6C8F93419D2F9E7BF92A /* ImageProcessingService.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3B3E8F4AE731AC87EB92EB77 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E6EFAF72821F50B0AD05DC5D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 75A1A76BF7A25D3B871B3E6B;
+			remoteInfo = PicToolPro;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0E271EF7F9B37004FA69DE3C /* FormatConvertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatConvertView.swift; sourceTree = "<group>"; };
+		1790E59E9F00B2CC1F93F149 /* ImageModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModels.swift; sourceTree = "<group>"; };
+		45DE6C8F93419D2F9E7BF92A /* ImageProcessingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessingService.swift; sourceTree = "<group>"; };
+		4F440F4337227C7A29F70910 /* PicToolProTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicToolProTests.swift; sourceTree = "<group>"; };
+		5837302D45ADE15A70CD57B4 /* PicToolPro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PicToolPro.entitlements; sourceTree = "<group>"; };
+		63A49CB5BBF3D806550107E8 /* PicToolPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PicToolPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B6E65D5FF8DFA2CEACC6FB3 /* PicToolProTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PicToolProTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		797314CCDA042584BDDCC5B8 /* CornerCropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerCropView.swift; sourceTree = "<group>"; };
+		8435860A0B36214F56C17BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		843C49ED4531AA27EADA3CD9 /* PicToolProApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicToolProApp.swift; sourceTree = "<group>"; };
+		9E479684D738A4BDAFFA1A73 /* CompressionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompressionView.swift; sourceTree = "<group>"; };
+		A97A9EDB63F796792C7579F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CF2485AE054C0EC57E8D596B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D3B95ED1488622174BA8308F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		16B74218AA13997464DD2D35 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				1BE190550D6A0E2E66A5018B /* App */,
+				8BFA24FCF8BC460845917114 /* Models */,
+				D52FE07CC1A48C8CE7FF1618 /* Services */,
+				5AC8AF45F7AC4827272AC24E /* Utils */,
+				4ABA9BA1AB2BC12EB1A54F34 /* Views */,
+			);
+			name = Sources;
+			path = PicToolPro/Sources;
+			sourceTree = "<group>";
+		};
+		1BE190550D6A0E2E66A5018B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				843C49ED4531AA27EADA3CD9 /* PicToolProApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		36ECC8078A747731918E0CF5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A97A9EDB63F796792C7579F6 /* Assets.xcassets */,
+				8435860A0B36214F56C17BCD /* Info.plist */,
+				5837302D45ADE15A70CD57B4 /* PicToolPro.entitlements */,
+			);
+			name = Resources;
+			path = PicToolPro/Resources;
+			sourceTree = "<group>";
+		};
+		45749A8CDF22ED2C0DDE99C8 = {
+			isa = PBXGroup;
+			children = (
+				36ECC8078A747731918E0CF5 /* Resources */,
+				16B74218AA13997464DD2D35 /* Sources */,
+				59578DF507885B8F222191D6 /* Tests */,
+				69C009675328963C625195A5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4ABA9BA1AB2BC12EB1A54F34 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9E479684D738A4BDAFFA1A73 /* CompressionView.swift */,
+				D3B95ED1488622174BA8308F /* ContentView.swift */,
+				797314CCDA042584BDDCC5B8 /* CornerCropView.swift */,
+				0E271EF7F9B37004FA69DE3C /* FormatConvertView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		59578DF507885B8F222191D6 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				CF2485AE054C0EC57E8D596B /* Info.plist */,
+				4F440F4337227C7A29F70910 /* PicToolProTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		5AC8AF45F7AC4827272AC24E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		69C009675328963C625195A5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				63A49CB5BBF3D806550107E8 /* PicToolPro.app */,
+				6B6E65D5FF8DFA2CEACC6FB3 /* PicToolProTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8BFA24FCF8BC460845917114 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1790E59E9F00B2CC1F93F149 /* ImageModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D52FE07CC1A48C8CE7FF1618 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				45DE6C8F93419D2F9E7BF92A /* ImageProcessingService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3E86CBBC64E9758B4E464E42 /* PicToolProTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF92DF65EBA198046B38A1F6 /* Build configuration list for PBXNativeTarget "PicToolProTests" */;
+			buildPhases = (
+				3F0FACFF8D69A7FA48799876 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7BECE3EAA530F578DC2B3B4D /* PBXTargetDependency */,
+			);
+			name = PicToolProTests;
+			packageProductDependencies = (
+			);
+			productName = PicToolProTests;
+			productReference = 6B6E65D5FF8DFA2CEACC6FB3 /* PicToolProTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		75A1A76BF7A25D3B871B3E6B /* PicToolPro */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD214DC706823C71E0B74CB0 /* Build configuration list for PBXNativeTarget "PicToolPro" */;
+			buildPhases = (
+				9641B6D4941D330829B5CC11 /* Sources */,
+				C7025FE932B6CA2463D80AE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PicToolPro;
+			packageProductDependencies = (
+			);
+			productName = PicToolPro;
+			productReference = 63A49CB5BBF3D806550107E8 /* PicToolPro.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E6EFAF72821F50B0AD05DC5D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = B45409B23DE86D11D525D385 /* Build configuration list for PBXProject "PicToolPro" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 45749A8CDF22ED2C0DDE99C8;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 69C009675328963C625195A5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				75A1A76BF7A25D3B871B3E6B /* PicToolPro */,
+				3E86CBBC64E9758B4E464E42 /* PicToolProTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C7025FE932B6CA2463D80AE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F475E600C56B82069B3D29B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3F0FACFF8D69A7FA48799876 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47A7508E11A34F675E9CC9DA /* PicToolProTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9641B6D4941D330829B5CC11 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E0E7993A9EA0E8CA1CBD61C /* CompressionView.swift in Sources */,
+				718C5EC869802741F1D35916 /* ContentView.swift in Sources */,
+				01558DFC797FE7DF73B844D3 /* CornerCropView.swift in Sources */,
+				6D75A53D3A2A6A069B52A9CD /* FormatConvertView.swift in Sources */,
+				8F78A44D0E697F914364EE36 /* ImageModels.swift in Sources */,
+				D299CDB6F20EC055B8AE4FFE /* ImageProcessingService.swift in Sources */,
+				5FD6EA992969200756551FA1 /* PicToolProApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7BECE3EAA530F578DC2B3B4D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 75A1A76BF7A25D3B871B3E6B /* PicToolPro */;
+			targetProxy = 3B3E8F4AE731AC87EB92EB77 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		174DD4B1A4193096139C83CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "PicTool Pro";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		1AF3B6C14A2BE8D350D6FEA6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pictool.PicToolProTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PicTool Pro.app/Contents/MacOS/PicTool Pro";
+			};
+			name = Debug;
+		};
+		25DB6149D9DADFB77C3AB467 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PicToolPro/Resources/PicToolPro.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = PicToolPro/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pictool.PicToolPro;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		6516FB45FFD41C3479E6B4F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PicToolPro/Resources/PicToolPro.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = PicToolPro/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pictool.PicToolPro;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A1560C650BFF65B20770469C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "PicTool Pro";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		BAA6A582573F739722392147 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pictool.PicToolProTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PicTool Pro.app/Contents/MacOS/PicTool Pro";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AD214DC706823C71E0B74CB0 /* Build configuration list for PBXNativeTarget "PicToolPro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6516FB45FFD41C3479E6B4F7 /* Debug */,
+				25DB6149D9DADFB77C3AB467 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B45409B23DE86D11D525D385 /* Build configuration list for PBXProject "PicToolPro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1560C650BFF65B20770469C /* Debug */,
+				174DD4B1A4193096139C83CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FF92DF65EBA198046B38A1F6 /* Build configuration list for PBXNativeTarget "PicToolProTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1AF3B6C14A2BE8D350D6FEA6 /* Debug */,
+				BAA6A582573F739722392147 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E6EFAF72821F50B0AD05DC5D /* Project object */;
+}
