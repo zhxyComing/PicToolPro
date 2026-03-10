@@ -165,7 +165,7 @@ struct ImageMetadata {
         }
         
         // Bit depth
-        bitDepth = cgImage.bitsPerComponent * cgImage.bitsPerPixel / cgImage.componentsPerPixel
+        bitDepth = cgImage.bitsPerComponent
         
         // DPI - from image source
         if let imageSource = CGImageSourceCreateWithURL(loadedImage.url as CFURL, nil),
