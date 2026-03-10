@@ -7,7 +7,7 @@ struct LoadedImage: Identifiable {
     let nsImage: NSImage
     var originalData: Data?
     
-    init?(url: URL, nsImage: NSImage) {
+    init(url: URL, nsImage: NSImage) {
         self.url = url
         self.nsImage = nsImage
         self.originalData = try? Data(contentsOf: url)

@@ -177,8 +177,9 @@ struct ContentView: View {
                       url.isFileURL,
                       let nsImage = NSImage(contentsOf: url) else { return }
                 
+                let loadedImage = LoadedImage(url: url, nsImage: nsImage)
                 DispatchQueue.main.async {
-                    self.images = [LoadedImage(url: url, nsImage: nsImage)]
+                    self.images = [loadedImage]
                     self.processedImages = []
                 }
             }
