@@ -18,16 +18,20 @@ struct CornerCropView: View {
             
             // Preset Selection
             VStack(alignment: .leading, spacing: 8) {
-                Text("圆角半径")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+                HStack {
+                    Text("圆角半径")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    Spacer()
+                }
                 
-                Picker("预设", selection: $selectedPreset) {
+                Picker("", selection: $selectedPreset) {
                     ForEach(CornerRadiusPreset.allCases, id: \.self) { preset in
                         Text(preset.rawValue).tag(preset)
                     }
                 }
                 .pickerStyle(.segmented)
+                .labelsHidden()
                 
                 if selectedPreset == .custom {
                     HStack {

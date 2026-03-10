@@ -16,7 +16,7 @@ struct ContentView: View {
             switch self {
             case .cornerCrop: return "rectangle.on.rectangle"
             case .compression: return "arrow.down.circle"
-            case .formatConvert: return "arrow.triangle.2.circlecircle"
+            case .formatConvert: return "doc.badge.arrow.up"
             }
         }
     }
