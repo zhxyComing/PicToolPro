@@ -174,13 +174,12 @@ struct ContentView: View {
             provider.loadItem(forTypeIdentifier: "public.file-url", options: nil) { item, error in
                 guard let data = item as? Data,
                       let url = URL(dataRepresentation: data, relativeTo: nil),
-                      url.isFileURL else { return }
+                      url.isFileURL,
+                      let nsImage = NSImage(contentsOf: url) else { return }
                 
-                if let nsImage = NSImage(contentsOf: url) {
-                    DispatchQueue.main.async {
-                        self.images = [LoadedImage(url: url, nsImage: nsImage)]
-                        self.processedImages = []
-                    }
+                DispatchQueue.main.async {
+                    self.images = [LoadedImage(url: url, nsImage: nsImage)]
+                    self.processedImages = []
                 }
             }
             handled = true
