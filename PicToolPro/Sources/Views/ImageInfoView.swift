@@ -150,28 +150,22 @@ struct ImageMetadata {
         }
         
         // Color space
-        if let colorSpace = cgImage.colorSpace {
-            let name = colorSpace.model
-            switch name {
+        if let cgColorSpace = cgImage.colorSpace {
+            let model = cgColorSpace.model
+            switch model {
             case .rgb:
                 colorSpace = "RGB"
-            case .gray:
+            case .monochrome:
                 colorSpace = "灰度"
             case .cmyk:
                 colorSpace = "CMYK"
-            case .deviceN:
-                colorSpace = "DeviceN"
-            case .indexed:
-                colorSpace = "索引"
-            case .monochrome:
-                colorSpace = "单色"
-            @unknown default:
-                colorSpace = "未知"
+            default:
+                colorSpace = "其他"
             }
         }
         
         // Bit depth
-        bitDepth = cgImage.bitsPerComponent * cgImage.componentsPerPixel
+        bitDepth = cgImage.bitsPerComponent * cgImage.bitsPerPixel / cgImage.componentsPerPixel
         
         // DPI - from image source
         if let imageSource = CGImageSourceCreateWithURL(loadedImage.url as CFURL, nil),
