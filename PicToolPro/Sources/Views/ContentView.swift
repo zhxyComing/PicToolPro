@@ -1,4 +1,5 @@
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct ContentView: View {
     @State private var selectedTool: ToolType = .cornerCrop
@@ -62,6 +63,9 @@ struct ContentView: View {
                         .buttonStyle(.borderedProminent)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .onDrop(of: [.fileURL], isTargeted: nil) { providers in
+                        self.handleDrop(providers: providers)
+                    }
                 } else {
                     HStack {
                         if !processedImages.isEmpty && !showOriginal {
@@ -78,6 +82,9 @@ struct ContentView: View {
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color(NSColor.textBackgroundColor))
+                    .onDrop(of: [.fileURL], isTargeted: nil) { providers in
+                        self.handleDrop(providers: providers)
+                    }
                     
                     // Toggle Original/Processed
                     if !processedImages.isEmpty {
@@ -149,12 +156,36 @@ struct ContentView: View {
         panel.prompt = "选择导出目录"
         
         if panel.runModal() == .OK, let url = panel.url {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyyMMdd_HHmmss"
+            let timestamp = formatter.string(from: Date())
+            
             for (index, processed) in processedImages.enumerated() {
-                let fileName = "PicTool_Export_\(index + 1).\(processed.format.rawValue)"
+                let fileName = "PicTool_\(timestamp)_\(index + 1).\(processed.format.rawValue)"
                 let fileURL = url.appendingPathComponent(fileName)
                 try? processed.data.write(to: fileURL)
             }
         }
+    }
+    
+    private func handleDrop(providers: [NSItemProvider]) -> Bool {
+        var handled = false
+        for provider in providers {
+            provider.loadItem(forTypeIdentifier: "public.file-url", options: nil) { item, error in
+                guard let data = item as? Data,
+                      let url = URL(dataRepresentation: data, relativeTo: nil),
+                      url.isFileURL else { return }
+                
+                if let nsImage = NSImage(contentsOf: url) {
+                    DispatchQueue.main.async {
+                        self.images = [LoadedImage(url: url, nsImage: nsImage)]
+                        self.processedImages = []
+                    }
+                }
+            }
+            handled = true
+        }
+        return handled
     }
 }
 
