@@ -85,13 +85,19 @@ struct CornerCropView: View {
                     transparentBackground: transparentBackground
                 ) else { return nil }
                 
-                let data = processed.tiffRepresentation ?? Data()
+                // Properly encode as PNG
+                guard let tiffData = processed.tiffRepresentation,
+                      let bitmap = NSBitmapImageRep(data: tiffData),
+                      let pngData = bitmap.representation(using: .png, properties: [:]) else {
+                    return nil
+                }
+                
                 return ProcessedImage(
                     nsImage: processed,
-                    data: data,
+                    data: pngData,
                     format: .png,
                     originalSize: loadedImage.originalData?.count ?? 0,
-                    processedSize: data.count
+                    processedSize: pngData.count
                 )
             }
             
