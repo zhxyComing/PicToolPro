@@ -1,6 +1,8 @@
 import Foundation
 import AppKit
 import CoreImage
+import ImageIO
+import UniformTypeIdentifiers
 
 class ImageProcessingService {
     static let shared = ImageProcessingService()
@@ -146,9 +148,14 @@ class ImageProcessingService {
         case .jpg:
             data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: quality])
         case .webp:
-            // WebP requires additional library, fall back to JPEG
-            data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: quality])
-            actualFormat = .jpg // Return actual format used
+            // Try native WebP encoding via ImageIO
+            if let webpData = encodeToWebP(image: image, quality: quality) {
+                data = webpData
+            } else {
+                // Fallback to JPEG
+                data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: quality])
+                actualFormat = .jpg
+            }
         case .heic:
             data = bitmap.representation(using: .jpeg2000, properties: [.compressionFactor: quality])
         case .bmp:
@@ -156,15 +163,66 @@ class ImageProcessingService {
         case .gif:
             data = bitmap.representation(using: .gif, properties: [:])
         case .avif:
-            // AVIF requires additional library, fall back to JPEG
-            data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: quality])
-            actualFormat = .jpg // Return actual format used
+            // Try native AVIF encoding via ImageIO
+            if let avifData = encodeToAVIF(image: image, quality: quality) {
+                data = avifData
+            } else {
+                // Fallback to JPEG
+                data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: quality])
+                actualFormat = .jpg
+            }
         }
         
         guard let convertedData = data,
               let convertedImage = NSImage(data: convertedData) else { return nil }
         
         return (convertedImage, convertedData, actualFormat)
+    }
+    
+    // MARK: - WebP Encoding via ImageIO
+    
+    private func encodeToWebP(image: NSImage, quality: Double) -> Data? {
+        guard let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return nil }
+        
+        let mutableData = NSMutableData()
+        guard let destination = CGImageDestinationCreateWithData(mutableData, "org.webmproject.webp" as CFString, 1, nil) else {
+            return nil
+        }
+        
+        let options: [CFString: Any] = [
+            kCGImageDestinationLossyCompressionQuality: quality
+        ]
+        
+        CGImageDestinationAddImage(destination, cgImage, options as CFDictionary)
+        
+        guard CGImageDestinationFinalize(destination) else {
+            return nil
+        }
+        
+        return mutableData as Data
+    }
+    
+    // MARK: - AVIF Encoding via ImageIO
+    
+    private func encodeToAVIF(image: NSImage, quality: Double) -> Data? {
+        guard let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return nil }
+        
+        let mutableData = NSMutableData()
+        guard let destination = CGImageDestinationCreateWithData(mutableData, "public.avif" as CFString, 1, nil) else {
+            return nil
+        }
+        
+        let options: [CFString: Any] = [
+            kCGImageDestinationLossyCompressionQuality: quality
+        ]
+        
+        CGImageDestinationAddImage(destination, cgImage, options as CFDictionary)
+        
+        guard CGImageDestinationFinalize(destination) else {
+            return nil
+        }
+        
+        return mutableData as Data
     }
     
     // MARK: - Batch Processing
