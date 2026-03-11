@@ -13,6 +13,7 @@ struct ContentView: View {
         case compression = "图片压缩"
         case formatConvert = "格式转换"
         case imageInfo = "图片信息"
+        case stitch = "图片拼接"
         
         var icon: String {
             switch self {
@@ -20,6 +21,7 @@ struct ContentView: View {
             case .compression: return "arrow.down.circle"
             case .formatConvert: return "doc.badge.arrow.up"
             case .imageInfo: return "info.circle"
+            case .stitch: return "rectangle.split.3x1"
             }
         }
     }
@@ -107,6 +109,8 @@ struct ContentView: View {
                         FormatConvertView(images: $images, processedImages: $processedImages, isProcessing: $isProcessing)
                     case .imageInfo:
                         ImageInfoView(images: $images)
+                    case .stitch:
+                        StitchView(images: $images, processedImages: $processedImages, isProcessing: $isProcessing)
                     }
                 }
                 
@@ -140,9 +144,18 @@ struct ContentView: View {
         panel.allowedContentTypes = [.image, .png, .jpeg, .heic, .bmp, .gif]
         
         if panel.runModal() == .OK {
-            images = panel.urls.compactMap { url in
-                guard let nsImage = NSImage(contentsOf: url) else { return nil }
-                return LoadedImage(url: url, nsImage: nsImage)
+            // For stitch mode, append images; otherwise replace
+            if selectedTool == .stitch {
+                for url in panel.urls {
+                    if let nsImage = NSImage(contentsOf: url) {
+                        images.append(LoadedImage(url: url, nsImage: nsImage))
+                    }
+                }
+            } else {
+                images = panel.urls.compactMap { url in
+                    guard let nsImage = NSImage(contentsOf: url) else { return nil }
+                    return LoadedImage(url: url, nsImage: nsImage)
+                }
             }
             processedImages = []
         }
@@ -160,10 +173,19 @@ struct ContentView: View {
             formatter.dateFormat = "yyyyMMdd_HHmmss"
             let timestamp = formatter.string(from: Date())
             
-            for (index, processed) in processedImages.enumerated() {
-                let fileName = "PicTool_\(timestamp)_\(index + 1).\(processed.format.rawValue)"
+            // If it's a stitched image (only one processed image), export as single file
+            if processedImages.count == 1 && images.count > 1 {
+                let processed = processedImages[0]
+                let fileName = "PicTool_Stitched_\(timestamp).\(processed.format.rawValue)"
                 let fileURL = url.appendingPathComponent(fileName)
                 try? processed.data.write(to: fileURL)
+            } else {
+                // Original behavior for multiple images
+                for (index, processed) in processedImages.enumerated() {
+                    let fileName = "PicTool_\(timestamp)_\(index + 1).\(processed.format.rawValue)"
+                    let fileURL = url.appendingPathComponent(fileName)
+                    try? processed.data.write(to: fileURL)
+                }
             }
         }
     }
@@ -179,7 +201,12 @@ struct ContentView: View {
                 
                 let loadedImage = LoadedImage(url: url, nsImage: nsImage)
                 DispatchQueue.main.async {
-                    self.images = [loadedImage]
+                    // For stitch mode, append images; otherwise replace
+                    if self.selectedTool == .stitch {
+                        self.images.append(loadedImage)
+                    } else {
+                        self.images = [loadedImage]
+                    }
                     self.processedImages = []
                 }
             }

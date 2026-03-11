@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		01558DFC797FE7DF73B844D3 /* CornerCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797314CCDA042584BDDCC5B8 /* CornerCropView.swift */; };
+		1BA75601CE63D8F884A9E386 /* StitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A85FF0026CBE2D021511564 /* StitchView.swift */; };
 		47A7508E11A34F675E9CC9DA /* PicToolProTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F440F4337227C7A29F70910 /* PicToolProTests.swift */; };
 		5F475E600C56B82069B3D29B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A97A9EDB63F796792C7579F6 /* Assets.xcassets */; };
 		5FD6EA992969200756551FA1 /* PicToolProApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C49ED4531AA27EADA3CD9 /* PicToolProApp.swift */; };
@@ -40,6 +41,7 @@
 		797314CCDA042584BDDCC5B8 /* CornerCropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerCropView.swift; sourceTree = "<group>"; };
 		8435860A0B36214F56C17BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		843C49ED4531AA27EADA3CD9 /* PicToolProApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicToolProApp.swift; sourceTree = "<group>"; };
+		8A85FF0026CBE2D021511564 /* StitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StitchView.swift; sourceTree = "<group>"; };
 		9E479684D738A4BDAFFA1A73 /* CompressionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompressionView.swift; sourceTree = "<group>"; };
 		A97A9EDB63F796792C7579F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF2485AE054C0EC57E8D596B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				797314CCDA042584BDDCC5B8 /* CornerCropView.swift */,
 				0E271EF7F9B37004FA69DE3C /* FormatConvertView.swift */,
 				F584C8BB1147912F77BA380E /* ImageInfoView.swift */,
+				8A85FF0026CBE2D021511564 /* StitchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				8F78A44D0E697F914364EE36 /* ImageModels.swift in Sources */,
 				D299CDB6F20EC055B8AE4FFE /* ImageProcessingService.swift in Sources */,
 				5FD6EA992969200756551FA1 /* PicToolProApp.swift in Sources */,
+				1BA75601CE63D8F884A9E386 /* StitchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
