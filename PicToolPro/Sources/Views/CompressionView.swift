@@ -138,6 +138,17 @@ struct CompressionView: View {
         }
         
         DispatchQueue.global(qos: .userInitiated).async {
+            // Determine output format based on compression mode
+            let outputFormat: ImageFormat
+            switch compressionMode {
+            case .lossless:
+                outputFormat = .png
+            case .lossy:
+                outputFormat = .jpg
+            case .scale:
+                outputFormat = .png
+            }
+            
             let results = ImageProcessingService.shared.batchProcess(images: images) { loadedImage in
                 guard let (processed, data) = ImageProcessingService.shared.compress(
                     image: loadedImage.nsImage,
@@ -147,7 +158,7 @@ struct CompressionView: View {
                 return ProcessedImage(
                     nsImage: processed,
                     data: data,
-                    format: .jpg,
+                    format: outputFormat,
                     originalSize: loadedImage.originalData?.count ?? 0,
                     processedSize: data.count
                 )

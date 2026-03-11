@@ -133,11 +133,12 @@ class ImageProcessingService {
     
     // MARK: - Format Conversion
     
-    func convert(image: NSImage, to format: ImageFormat, quality: Double = 0.8) -> (NSImage, Data)? {
+    func convert(image: NSImage, to format: ImageFormat, quality: Double = 0.8) -> (NSImage, Data, ImageFormat)? {
         guard let tiffData = image.tiffRepresentation,
               let bitmap = NSBitmapImageRep(data: tiffData) else { return nil }
         
         var data: Data?
+        var actualFormat = format
         
         switch format {
         case .png:
@@ -145,8 +146,9 @@ class ImageProcessingService {
         case .jpg:
             data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: quality])
         case .webp:
-            // WebP - use JPEG as fallback (WebP requires additional library)
+            // WebP requires additional library, fall back to JPEG
             data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: quality])
+            actualFormat = .jpg // Return actual format used
         case .heic:
             data = bitmap.representation(using: .jpeg2000, properties: [.compressionFactor: quality])
         case .bmp:
@@ -154,14 +156,15 @@ class ImageProcessingService {
         case .gif:
             data = bitmap.representation(using: .gif, properties: [:])
         case .avif:
-            // AVIF - use JPEG as fallback
+            // AVIF requires additional library, fall back to JPEG
             data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: quality])
+            actualFormat = .jpg // Return actual format used
         }
         
         guard let convertedData = data,
               let convertedImage = NSImage(data: convertedData) else { return nil }
         
-        return (convertedImage, convertedData)
+        return (convertedImage, convertedData, actualFormat)
     }
     
     // MARK: - Batch Processing

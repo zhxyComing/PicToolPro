@@ -126,7 +126,7 @@ struct FormatConvertView: View {
         
         DispatchQueue.global(qos: .userInitiated).async {
             let results = ImageProcessingService.shared.batchProcess(images: images) { loadedImage in
-                guard let (processed, data) = ImageProcessingService.shared.convert(
+                guard let (processed, data, actualFormat) = ImageProcessingService.shared.convert(
                     image: loadedImage.nsImage,
                     to: selectedFormat,
                     quality: quality / 100.0
@@ -135,7 +135,7 @@ struct FormatConvertView: View {
                 return ProcessedImage(
                     nsImage: processed,
                     data: data,
-                    format: selectedFormat,
+                    format: actualFormat,
                     originalSize: loadedImage.originalData?.count ?? 0,
                     processedSize: data.count
                 )
