@@ -1,7 +1,7 @@
 import Foundation
 import AppKit
 
-struct LoadedImage: Identifiable {
+struct LoadedImage: Identifiable, Equatable {
     let id = UUID()
     let url: URL
     let nsImage: NSImage
@@ -11,6 +11,10 @@ struct LoadedImage: Identifiable {
         self.url = url
         self.nsImage = nsImage
         self.originalData = try? Data(contentsOf: url)
+    }
+    
+    static func == (lhs: LoadedImage, rhs: LoadedImage) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 

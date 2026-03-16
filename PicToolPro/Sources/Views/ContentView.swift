@@ -9,10 +9,10 @@ struct ContentView: View {
     @State private var showOriginal: Bool = true
     
     enum ToolType: String, CaseIterable {
+        case imageInfo = "图片信息"
         case cornerCrop = "圆角裁剪"
         case compression = "图片压缩"
         case formatConvert = "格式转换"
-        case imageInfo = "图片信息"
         case stitch = "图片拼接"
         
         var icon: String {
