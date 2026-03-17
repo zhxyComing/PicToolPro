@@ -153,6 +153,8 @@ struct ImageInfoView: View {
                         info.height = Int(dims[1]) ?? 0
                     }
                 }
+            } else if trimmed.hasPrefix("Resolution:") {
+                info.resolution = String(trimmed.dropFirst(11)).trimmingCharacters(in: .whitespaces)
             } else if trimmed.hasPrefix("Units:") {
                 info.units = String(trimmed.dropFirst(6)).trimmingCharacters(in: .whitespaces)
             } else if trimmed.hasPrefix("Colorspace:") {
@@ -380,6 +382,7 @@ struct ImageDetailedInfo {
     var imageClass: String = ""
     var width: Int = 0
     var height: Int = 0
+    var resolution: String = ""      // 分辨率 (如 144x144)
     
     // === 颜色与图像类型 ===
     var colorspace: String = ""
@@ -480,6 +483,11 @@ struct ImageInfoCard: View {
             // 基本信息
             Group {
                 InfoRow(label: "尺寸", value: "\(info.width) × \(info.height) px")
+                
+                if let detailed = detailedInfo, !detailed.resolution.isEmpty {
+                    InfoRow(label: "分辨率", value: detailed.resolution)
+                }
+                
                 InfoRow(label: "文件大小", value: info.fileSize)
                 InfoRow(label: "格式", value: info.format.uppercased())
             }
