@@ -85,6 +85,20 @@ struct ImageInfoView: View {
             print("Error running identify: \(error)")
         }
         
+        // 后备方案：如果 identify 没有获取到文件信息，用原生方式补充
+        if info.fileSize.isEmpty {
+            do {
+                let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
+                if let fileSize = attributes[.size] as? Int64 {
+                    let formatter = ByteCountFormatter()
+                    formatter.countStyle = .file
+                    info.fileSize = formatter.string(fromByteCount: fileSize)
+                }
+            } catch {
+                print("Error getting file size: \(error)")
+            }
+        }
+        
         return info
     }
     
