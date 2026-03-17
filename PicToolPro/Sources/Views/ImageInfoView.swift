@@ -36,8 +36,8 @@ struct ImageInfoView: View {
             Spacer()
         }
         .padding()
-        .onChange(of: images) { newImages in
-            loadDetailedInfo(for: newImages)
+        .onChange(of: images.count) { _ in
+            loadDetailedInfo(for: images)
         }
         .onAppear {
             loadDetailedInfo(for: images)
@@ -46,16 +46,28 @@ struct ImageInfoView: View {
     
     private func loadDetailedInfo(for images: [LoadedImage]) {
         guard !images.isEmpty else { return }
+        
+        // 获取已加载的 keys
+        let existingKeys = Set(detailedInfo.keys)
+        
+        // 只加载新图片
+        let newImages = images.filter { !existingKeys.contains($0.id.uuidString) }
+        
+        guard !newImages.isEmpty else { return }
+        
         isLoading = true
         
+        // 复制当前的 detailedInfo 以便在后台线程使用
+        var currentInfo = detailedInfo
+        
         DispatchQueue.global(qos: .userInitiated).async {
-            var results: [String: ImageDetailedInfo] = [:]
-            for image in images {
-                let info = getDetailedInfo(from: image.url)
-                results[image.id.uuidString] = info
+            for image in newImages {
+                let info = self.getDetailedInfo(from: image.url)
+                currentInfo[image.id.uuidString] = info
             }
+            
             DispatchQueue.main.async {
-                self.detailedInfo = results
+                self.detailedInfo = currentInfo
                 self.isLoading = false
             }
         }
